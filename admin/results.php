@@ -62,10 +62,10 @@ $results = $resultModel->getAllResults(100, 0);
     <div class="container mx-auto px-4 py-8">
         
         <!-- Page Header -->
-        <div class="mb-8 flex items-center justify-between">
+        <div class="mb-6 lg:mb-8">
             <div>
-                <h1 class="text-3xl font-bold text-gray-800">Sorğu Nəticələri</h1>
-                <p class="text-gray-600 mt-1">Bütün istifadəçi cavabları</p>
+                <h1 class="text-2xl lg:text-3xl font-bold text-gray-800">Sorğu Nəticələri</h1>
+                <p class="text-sm lg:text-base text-gray-600 mt-1">Bütün istifadəçi cavabları</p>
             </div>
         </div>
 
@@ -75,8 +75,8 @@ $results = $resultModel->getAllResults(100, 0);
             </div>
         <?php endif; ?>
 
-        <!-- Results Table -->
-        <div class="bg-white rounded-xl shadow-sm border border-gray-200">
+        <!-- Results - Desktop Table (hidden on mobile) -->
+        <div class="hidden lg:block bg-white rounded-xl shadow-sm border border-gray-200">
             <div class="overflow-x-auto">
                 <table class="w-full">
                     <thead class="bg-gray-50">
@@ -125,6 +125,75 @@ $results = $resultModel->getAllResults(100, 0);
                     </tbody>
                 </table>
             </div>
+        </div>
+
+        <!-- Results - Mobile Cards (visible on mobile only) -->
+        <div class="lg:hidden space-y-4">
+            <?php if (empty($results)): ?>
+                <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-8 text-center text-gray-500">
+                    Hələ ki nəticə yoxdur
+                </div>
+            <?php else: ?>
+                <?php foreach ($results as $result): ?>
+                    <?php 
+                    $fullName = trim(($result['user_name'] ?? '') . ' ' . ($result['user_surname'] ?? ''));
+                    ?>
+                    <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-4">
+                        <!-- Card Header -->
+                        <div class="flex items-start justify-between mb-3 pb-3 border-b border-gray-200">
+                            <div>
+                                <span class="text-xs font-semibold text-gray-500">ID</span>
+                                <p class="text-lg font-bold text-gray-800">#<?php echo $result['id']; ?></p>
+                            </div>
+                            <span class="bg-blue-100 text-blue-700 text-xs px-2 py-1 rounded-full">
+                                <?php echo date('d.m.Y', strtotime($result['created_at'])); ?>
+                            </span>
+                        </div>
+
+                        <!-- Card Content -->
+                        <div class="space-y-2 mb-4">
+                            <div class="flex justify-between items-center">
+                                <span class="text-xs text-gray-500 uppercase">Ad Soyad</span>
+                                <span class="text-sm font-medium text-gray-800"><?php echo Security::escape($fullName ?: '-'); ?></span>
+                            </div>
+                            
+                            <?php if (!empty($result['phone_number'])): ?>
+                            <div class="flex justify-between items-center">
+                                <span class="text-xs text-gray-500 uppercase">Telefon</span>
+                                <a href="tel:<?php echo Security::escape($result['phone_number']); ?>" class="text-sm font-medium text-blue-600">
+                                    <?php echo Security::escape($result['phone_number']); ?>
+                                </a>
+                            </div>
+                            <?php endif; ?>
+                            
+                            <div class="flex justify-between items-center">
+                                <span class="text-xs text-gray-500 uppercase">Qiymət</span>
+                                <span class="text-lg font-bold text-green-600"><?php echo $result['calculated_price']; ?> ₼</span>
+                            </div>
+                            
+                            <div class="flex justify-between items-center">
+                                <span class="text-xs text-gray-500 uppercase">Məhsul</span>
+                                <span class="text-sm font-medium text-gray-800"><?php echo Security::escape($result['product_name'] ?? '-'); ?></span>
+                            </div>
+                            
+                            <div class="flex justify-between items-center">
+                                <span class="text-xs text-gray-500 uppercase">Tarix</span>
+                                <span class="text-xs text-gray-600"><?php echo date('d.m.Y H:i', strtotime($result['created_at'])); ?></span>
+                            </div>
+                        </div>
+
+                        <!-- Card Actions -->
+                        <div class="flex gap-2 pt-3 border-t border-gray-200">
+                            <button onclick="viewDetails(<?php echo $result['id']; ?>)" class="flex-1 bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-blue-700 transition-colors">
+                                Bax
+                            </button>
+                            <button onclick="confirmDelete(<?php echo $result['id']; ?>)" class="flex-1 bg-red-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-red-700 transition-colors">
+                                Sil
+                            </button>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
+            <?php endif; ?>
         </div>
 
     </div>

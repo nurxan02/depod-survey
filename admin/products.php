@@ -121,12 +121,12 @@ $products = $productModel->getAllProducts(false); // Get all, including inactive
     <div class="container mx-auto px-4 py-8">
         
         <!-- Page Header -->
-        <div class="mb-8 flex items-center justify-between">
+        <div class="mb-6 lg:mb-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
             <div>
-                <h1 class="text-3xl font-bold text-gray-800">Məhsulların İdarə Edilməsi</h1>
-                <p class="text-gray-600 mt-1">Məhsul məlumatları və tövsiyə parametrlərini redaktə edin</p>
+                <h1 class="text-2xl lg:text-3xl font-bold text-gray-800">Məhsuallarn İdarə Edilməsi</h1>
+                <p class="text-sm lg:text-base text-gray-600 mt-1">Məhsul məlumatları və tövsiyə parametrlərini redaktə edin</p>
             </div>
-            <button onclick="toggleNewProduct()" class="bg-gradient-to-r from-green-600 to-green-700 text-white px-6 py-3 rounded-lg hover:opacity-90 font-medium">
+            <button onclick="toggleNewProduct()" class="w-full sm:w-auto bg-gradient-to-r from-green-600 to-green-700 text-white px-4 lg:px-6 py-2 lg:py-3 rounded-lg hover:opacity-90 font-medium text-sm lg:text-base whitespace-nowrap">
                 + Yeni Məhsul Əlavə Et
             </button>
         </div>
@@ -208,21 +208,21 @@ $products = $productModel->getAllProducts(false); // Get all, including inactive
         <?php endif; ?>
 
         <!-- Products Grid -->
-        <div class="grid md:grid-cols-2 gap-6">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-6">
             <?php foreach ($products as $product): ?>
                 <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
                     
                     <!-- Product Header -->
-                    <div class="bg-gray-50 px-6 py-4 border-b border-gray-200 flex items-center justify-between">
+                    <div class="bg-gray-50 px-4 lg:px-6 py-3 lg:py-4 border-b border-gray-200 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-0">
                         <div>
-                            <h3 class="font-bold text-gray-800 text-lg"><?php echo Security::escape($product['product_name']); ?></h3>
-                            <p class="text-sm text-gray-600">Qiymət: <?php echo $product['base_price']; ?> ₼</p>
+                            <h3 class="text-base lg:text-lg font-bold text-gray-800"><?php echo Security::escape($product['product_name']); ?></h3>
+                            <p class="text-xs lg:text-sm text-gray-600">Qiymət: <?php echo $product['base_price']; ?> ₼</p>
                         </div>
-                        <div class="flex items-center gap-2">
+                        <div class="flex items-center gap-2 self-end sm:self-auto">
                             <?php if ($product['is_active']): ?>
-                                <span class="bg-green-100 text-green-700 text-xs px-3 py-1 rounded-full">Aktiv</span>
+                                <span class="bg-green-100 text-green-700 text-[10px] lg:text-xs px-2 lg:px-3 py-1 rounded-full">Aktiv</span>
                             <?php else: ?>
-                                <span class="bg-gray-100 text-gray-700 text-xs px-3 py-1 rounded-full">Deaktiv</span>
+                                <span class="bg-gray-100 text-gray-700 text-[10px] lg:text-xs px-2 lg:px-3 py-1 rounded-full">Deaktiv</span>
                             <?php endif; ?>
                             <button onclick="toggleEdit('product-<?php echo $product['id']; ?>')" class="text-blue-600 hover:text-blue-700">
                                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -243,7 +243,7 @@ $products = $productModel->getAllProducts(false); // Get all, including inactive
                     </div>
 
                     <!-- Product Content -->
-                    <div class="p-6">
+                    <div class="p-4 lg:p-6">
                         
                         <!-- View Mode -->
                         <div id="view-product-<?php echo $product['id']; ?>">

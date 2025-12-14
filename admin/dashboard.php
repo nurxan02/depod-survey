@@ -50,19 +50,19 @@ $recentResults = $resultModel->getAllResults(10, 0);
     <div class="container mx-auto px-4 py-8">
         
         <!-- Page Header -->
-        <div class="mb-8">
-            <h1 class="text-3xl font-bold text-gray-800">Dashboard</h1>
-            <p class="text-gray-600 mt-1">Xoş gəlmisiniz, <?php echo Security::escape($currentAdmin['username']); ?></p>
+        <div class="mb-6 lg:mb-8">
+            <h1 class="text-2xl lg:text-3xl font-bold text-gray-800">Dashboard</h1>
+            <p class="text-sm lg:text-base text-gray-600 mt-1">Xoş gəlmisiniz, <?php echo Security::escape($currentAdmin['username']); ?></p>
         </div>
 
         <!-- Statistics Cards -->
-        <div class="grid md:grid-cols-4 gap-6 mb-8">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6 mb-6 lg:mb-8">
             
-            <div class="bg-white rounded-xl shadow-sm p-6 border border-gray-200">
+            <div class="bg-white rounded-xl shadow-sm p-4 lg:p-6 border border-gray-200">
                 <div class="flex items-center justify-between">
                     <div>
-                        <p class="text-gray-600 text-sm">Ümumi Göndərişlər</p>
-                        <p class="text-3xl font-bold text-gray-800 mt-2"><?php echo $stats['total_submissions']; ?></p>
+                        <p class="text-gray-600 text-xs lg:text-sm">Ümumi Göndərişlər</p>
+                        <p class="text-2xl lg:text-3xl font-bold text-gray-800 mt-2"><?php echo $stats['total_submissions']; ?></p>
                     </div>
                     <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
                         <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -118,13 +118,15 @@ $recentResults = $resultModel->getAllResults(10, 0);
 
         <!-- Recent Results -->
         <div class="bg-white rounded-xl shadow-sm border border-gray-200">
-            <div class="px-6 py-4 border-b border-gray-200 flex items-center justify-between">
-                <h2 class="text-xl font-bold text-gray-800">Son Nəticələr</h2>
-                <a href="results.php" class="text-depod-red hover:text-depod-orange transition-colors">
+            <div class="px-4 lg:px-6 py-3 lg:py-4 border-b border-gray-200 flex items-center justify-between">
+                <h2 class="text-lg lg:text-xl font-bold text-gray-800">Son Nəticələr</h2>
+                <a href="results.php" class="text-sm lg:text-base text-depod-red hover:text-depod-orange transition-colors">
                     Hamısını Gör →
                 </a>
             </div>
-            <div class="overflow-x-auto">
+            
+            <!-- Desktop Table View -->
+            <div class="hidden lg:block overflow-x-auto">
                 <table class="w-full">
                     <thead class="bg-gray-50">
                         <tr>
@@ -162,6 +164,55 @@ $recentResults = $resultModel->getAllResults(10, 0);
                         <?php endif; ?>
                     </tbody>
                 </table>
+            </div>
+
+            <!-- Mobile List View -->
+            <div class="lg:hidden divide-y divide-gray-200">
+                <?php if (empty($recentResults)): ?>
+                    <div class="px-4 py-8 text-center text-gray-500">
+                        Hələ ki nəticə yoxdur
+                    </div>
+                <?php else: ?>
+                    <?php foreach ($recentResults as $result): ?>
+                        <?php 
+                        $fullName = trim(($result['user_name'] ?? '') . ' ' . ($result['user_surname'] ?? ''));
+                        ?>
+                        <div class="p-4 hover:bg-gray-50 transition-colors">
+                            <div class="flex items-start justify-between mb-2">
+                                <div class="flex items-center gap-2">
+                                    <span class="inline-flex items-center justify-center w-8 h-8 bg-blue-100 text-blue-700 rounded-full text-xs font-bold">
+                                        #<?php echo $result['id']; ?>
+                                    </span>
+                                    <div>
+                                        <p class="text-sm font-semibold text-gray-800">
+                                            <?php echo $fullName ?: 'Anonim'; ?>
+                                        </p>
+                                        <?php if (!empty($result['phone_number'])): ?>
+                                        <a href="tel:<?php echo $result['phone_number']; ?>" class="text-xs text-blue-600">
+                                            <?php echo $result['phone_number']; ?>
+                                        </a>
+                                        <?php endif; ?>
+                                    </div>
+                                </div>
+                                <span class="text-xs text-gray-500">
+                                    <?php echo date('d.m H:i', strtotime($result['created_at'])); ?>
+                                </span>
+                            </div>
+                            
+                            <div class="flex items-center justify-between mt-2 pt-2 border-t border-gray-100">
+                                <div class="flex items-center gap-3">
+                                    <span class="text-lg font-bold text-green-600">
+                                        <?php echo $result['calculated_price']; ?> ₼
+                                    </span>
+                                    <span class="text-xs text-gray-500">•</span>
+                                    <span class="text-xs text-gray-600">
+                                        <?php echo Security::escape($result['product_name'] ?? '-'); ?>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    <?php endforeach; ?>
+                <?php endif; ?>
             </div>
         </div>
 

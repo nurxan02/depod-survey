@@ -137,22 +137,22 @@ $questions = $questionModel->getAllQuestionsWithOptions();
     <div class="container mx-auto px-4 py-8">
         
         <!-- Page Header -->
-        <div class="mb-8 flex items-center justify-between">
+        <div class="mb-6 lg:mb-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
             <div>
-                <h1 class="text-3xl font-bold text-gray-800">Sualların İdarə Edilməsi</h1>
-                <p class="text-gray-600 mt-1">Sorğu sualları və cavablarını redaktə edin</p>
+                <h1 class="text-2xl lg:text-3xl font-bold text-gray-800">Suallarn İdarə Edilməsi</h1>
+                <p class="text-sm lg:text-base text-gray-600 mt-1">Sorğu sualları və cavablarını redaktə edin</p>
             </div>
-            <button onclick="toggleNewQuestion()" class="bg-gradient-to-r from-green-600 to-green-700 text-white px-6 py-3 rounded-lg hover:opacity-90 font-medium">
+            <button onclick="toggleNewQuestion()" class="w-full sm:w-auto bg-gradient-to-r from-green-600 to-green-700 text-white px-4 lg:px-6 py-2 lg:py-3 rounded-lg hover:opacity-90 font-medium text-sm lg:text-base whitespace-nowrap">
                 + Yeni Sual Əlavə Et
             </button>
         </div>
 
         <!-- New Question Form -->
         <div id="new-question-form" class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden mb-6 hidden">
-            <div class="bg-green-50 px-6 py-4 border-b border-gray-200">
-                <h3 class="font-bold text-gray-800">Yeni Sual</h3>
+            <div class="bg-green-50 px-4 lg:px-6 py-3 lg:py-4 border-b border-gray-200">
+                <h3 class="text-sm lg:text-base font-bold text-gray-800">Yeni Sual</h3>
             </div>
-            <div class="p-6">
+            <div class="p-4 lg:p-6">
                 <form method="POST" action="" class="space-y-4">
                     <input type="hidden" name="csrf_token" value="<?php echo Security::generateCSRFToken(); ?>">
                     <input type="hidden" name="action" value="create_question">
@@ -197,18 +197,18 @@ $questions = $questionModel->getAllQuestionsWithOptions();
                 <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
                     
                     <!-- Question Header -->
-                    <div class="bg-gray-50 px-6 py-4 border-b border-gray-200">
-                        <div class="flex items-center justify-between">
-                            <h3 class="font-bold text-gray-800">Sual <?php echo $question['order']; ?></h3>
-                            <div class="flex items-center gap-3">
-                                <button onclick="toggleEdit('question-<?php echo $question['id']; ?>')" class="text-blue-600 hover:text-blue-700 font-medium">
+                    <div class="bg-gray-50 px-4 lg:px-6 py-3 lg:py-4 border-b border-gray-200">
+                        <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 sm:gap-0">
+                            <h3 class="text-sm lg:text-base font-bold text-gray-800">Sual <?php echo $question['order']; ?></h3>
+                            <div class="flex items-center gap-2 lg:gap-3">
+                                <button onclick="toggleEdit('question-<?php echo $question['id']; ?>')" class="text-sm lg:text-base text-blue-600 hover:text-blue-700 font-medium">
                                     Redaktə Et
                                 </button>
                                 <form method="POST" action="" class="inline" onsubmit="return confirm('Bu sualı silmək istədiyinizə əminsiniz? Bütün cavablar da silinəcək!');">
                                     <input type="hidden" name="csrf_token" value="<?php echo Security::generateCSRFToken(); ?>">
                                     <input type="hidden" name="action" value="delete_question">
                                     <input type="hidden" name="question_id" value="<?php echo $question['id']; ?>">
-                                    <button type="submit" class="text-red-600 hover:text-red-700 font-medium">
+                                    <button type="submit" class="text-sm lg:text-base text-red-600 hover:text-red-700 font-medium">
                                         Sil
                                     </button>
                                 </form>
@@ -217,7 +217,7 @@ $questions = $questionModel->getAllQuestionsWithOptions();
                     </div>
 
                     <!-- Question Content -->
-                    <div class="p-6">
+                    <div class="p-4 lg:p-6">
                         
                         <!-- View Mode -->
                         <div id="view-question-<?php echo $question['id']; ?>">

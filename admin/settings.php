@@ -72,9 +72,9 @@ $settings = $settingsModel->getAllSettings();
     <div class="container mx-auto px-4 py-8">
         
         <!-- Page Header -->
-        <div class="mb-8">
-            <h1 class="text-3xl font-bold text-gray-800">Sistem Parametrləri</h1>
-            <p class="text-gray-600 mt-1">Header və sosial media linklərini redaktə edin</p>
+        <div class="mb-6 lg:mb-8">
+            <h1 class="text-2xl lg:text-3xl font-bold text-gray-800">Sistem Parametrləri</h1>
+            <p class="text-sm lg:text-base text-gray-600 mt-1">Header və sosial media linklərini redaktə edin</p>
         </div>
 
         <?php if ($message): ?>
@@ -94,11 +94,11 @@ $settings = $settingsModel->getAllSettings();
             <form method="POST" action="">
                 <input type="hidden" name="csrf_token" value="<?php echo Security::generateCSRFToken(); ?>">
                 
-                <div class="p-6 space-y-6">
+                <div class="p-4 lg:p-6 space-y-6">
                     
                     <!-- Header Section -->
                     <div class="border-b border-gray-200 pb-6">
-                        <h2 class="text-xl font-bold text-gray-800 mb-4">Header Parametrləri</h2>
+                        <h2 class="text-lg lg:text-xl font-bold text-gray-800 mb-4">Header Parametrləri</h2>
                         
                         <div>
                             <label class="block text-gray-700 font-medium mb-2">Header Alt Başlıq</label>
@@ -109,7 +109,7 @@ $settings = $settingsModel->getAllSettings();
 
                     <!-- Social Media Section -->
                     <div>
-                        <h2 class="text-xl font-bold text-gray-800 mb-4">Sosial Media Linkləri</h2>
+                        <h2 class="text-lg lg:text-xl font-bold text-gray-800 mb-4">Sosial Media Linkləri</h2>
                         
                         <div class="space-y-4">
                             <div>
@@ -157,8 +157,8 @@ $settings = $settingsModel->getAllSettings();
                 </div>
 
                 <!-- Submit Button -->
-                <div class="bg-gray-50 px-6 py-4 border-t border-gray-200">
-                    <button type="submit" class="bg-gradient-to-r from-blue-600 to-blue-700 text-white px-8 py-3 rounded-lg hover:opacity-90 font-medium">
+                <div class="bg-gray-50 px-4 lg:px-6 py-4 border-t border-gray-200">
+                    <button type="submit" class="w-full sm:w-auto bg-gradient-to-r from-blue-600 to-blue-700 text-white px-6 lg:px-8 py-2 lg:py-3 rounded-lg hover:opacity-90 font-medium text-sm lg:text-base">
                         Yadda Saxla
                     </button>
                 </div>
