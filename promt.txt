@@ -1,0 +1,34 @@
+Develop a complete, dynamic web application (Multistep Survey & Admin Panel) using **PHP (with strong security measures)** and **MySQL**. The frontend must utilize **Tailwind CSS** for a clean, professional, and fully responsive design (Depod.az style: White background, dark text, red/orange accents).
+
+**I. Database Schema (MySQL) and Security:**
+1.  **Schema:** Create the following tables:
+    * **`questions`:** `id` (PK), `question_text` (TEXT), `order` (INT).
+    * **`options`:** `id` (PK), `question_id` (FK), `option_text` (TEXT), `price_value` (INT), `is_premium` (BOOLEAN).
+    * **`products`:** `id` (PK), `product_name` (VARCHAR), `base_price` (INT), `optimal_fit_score` (JSON/TEXT - parameters for recommendation), `description` (TEXT).
+    * **`results`:** `id` (PK), `user_name` (VARCHAR, nullable), `user_surname` (VARCHAR, nullable), `phone_number` (VARCHAR, nullable), `calculated_price` (INT), `selected_product_id` (FK), `selection_details` (JSON - stores chosen option IDs).
+2.  **Security (Crucial):** Implement robust security measures:
+    * Use **PHP Data Objects (PDO)** with **Prepared Statements** for ALL database interactions to prevent SQL Injection.
+    * Sanitize and validate all user inputs (from the Contact Form and Admin Panel).
+    * Implement secure password hashing (e.g., `password_hash()`) for Admin Login credentials.
+
+**II. Frontend (Survey Flow - Steps 1-8):**
+1.  **UX/UI:** Implement smooth transitions (e.g., subtle fade or slide animation) between the 7 steps. Ensure full responsiveness.
+2.  **Step 1-7 (Choices):** Dynamically load questions and two options per question.
+    * **Progress Bar:** A visually appealing bar at the top, filling proportionally (1/7, 2/7, ..., 7/7) using the accent red/orange color.
+    * **Current Price Display:** A fixed badge (e.g., top right) showing the dynamically accumulated price in large, bold font.
+    * **Choice Cards:** Two clickable cards per step. Clicking the card selects the option, visually highlights the card (red/orange border), and updates the price via client-side JavaScript/AJAX.
+    * **Navigation:** Clear "Geri" (Previous) and "Növbəti" (Next) buttons.
+3.  **Step 8 (Final Result & Contact Form):**
+    * Display the **Final Calculated Price** clearly.
+    * **Product Recommendation Logic (PHP Logic Required):** Based on the user's 7 selections (option IDs), implement a PHP algorithm to determine and display the **most suitable product** from the `products` table (e.g., if total price > 130 ₼, recommend PEAK; if total price > 80 ₼ and ANC was chosen, recommend Pro2 ANC). The recommendation must feel personalized.
+    * **Contact Form:** Display non-required fields for **Ad, Soyad, Mobil Nömrə** above the final submission button.
+
+**III. Backend/Admin Panel (CRUD & Analytics):**
+1.  **Interface:** Clean, professional dashboard design using Tailwind CSS.
+2.  **Authentication:** Simple session-based Admin Login.
+3.  **Content Management (CRUD):** Implement sections allowing the Admin to:
+    * **Manage Questions & Options:** Easily set/edit the `question_text`, `option_text`, and the crucial `price_value` for each of the 7 steps.
+    * **Manage Products:** Edit product details, base prices, and the parameters used for the recommendation logic (`optimal_fit_score`).
+4.  **Results View:** Secure table view of all entries from the `results` table, displaying user contact info (if provided), the final price, selected product, and details of their 7 choices.
+
+**Action:** Generate the necessary HTML (Tailwind), PHP classes/functions (DB handling, routing, session management), and SQL boilerplate, ensuring the system is secure and the recommendation logic is clear and robust.

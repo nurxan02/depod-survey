@@ -1,0 +1,51 @@
+version: "3.8"
+
+services:
+  # MySQL Database Container
+  depod-db:
+    image: mysql:8.0
+    container_name: depod-mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: depod_root_2025
+      MYSQL_DATABASE: depod_survey
+      MYSQL_USER: depod_user
+      MYSQL_PASSWORD: depod_pass_2025
+    volumes:
+      - depod-db-data:/var/lib/mysql
+      - ./database/schema.sql:/docker-entrypoint-initdb.d/schema.sql
+    networks:
+      - depod-network
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Application Container
+  depod-app:
+    build: .
+    container_name: depod-survey-app
+    restart: unless-stopped
+    ports:
+      - "3169:80"
+    environment:
+      DB_HOST: depod-db
+      DB_NAME: depod_survey
+      DB_USER: depod_user
+      DB_PASS: depod_pass_2025
+    volumes:
+      - ./:/var/www/html
+    depends_on:
+      depod-db:
+        condition: service_healthy
+    networks:
+      - depod-network
+
+networks:
+  depod-network:
+    driver: bridge
+
+volumes:
+  depod-db-data:
+    driver: local

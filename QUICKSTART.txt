@@ -1,0 +1,136 @@
+╔══════════════════════════════════════════════════════════════╗
+║                   DEPOD SURVEY APPLICATION                   ║
+║              Multistep Survey & Admin Panel                  ║
+║                    © 2025 Depod.az                          ║
+╚══════════════════════════════════════════════════════════════╝
+
+┌──────────────────────────────────────────────────────────────┐
+│                    SÜRƏTLƏ BAŞLANĞIC                         │
+└──────────────────────────────────────────────────────────────┘
+
+1️⃣  QURAŞDIRMA
+
+    Terminal-da:
+    
+    cd /home/khan/apps/depod-survey
+    ./install.sh
+    
+    Və ya əl ilə:
+    
+    mysql -u root -p
+    CREATE DATABASE depod_survey;
+    exit;
+    
+    mysql -u root -p depod_survey < database/schema.sql
+
+2️⃣  KONFİQURASİYA
+
+    config/config.php faylını açın və DB məlumatlarını yeniləyin:
+    
+    DB_HOST: localhost
+    DB_NAME: depod_survey
+    DB_USER: root
+    DB_PASS: sizin_şifrəniz
+
+3️⃣  AÇIN
+
+    İstifadəçi Tərəfi:
+    http://localhost/depod-survey/
+    
+    Admin Panel:
+    http://localhost/depod-survey/admin/login.php
+    
+    Login: admin / admin123
+
+┌──────────────────────────────────────────────────────────────┐
+│                      XÜSUSİYYƏTLƏR                          │
+└──────────────────────────────────────────────────────────────┘
+
+✅ 7 Addımlı İnteraktiv Sorğu
+✅ Real-Vaxt Qiymət Hesablama
+✅ AI Məhsul Tövsiyəsi
+✅ Admin Panel (CRUD)
+✅ Dashboard & Statistika
+✅ Təhlükəsizlik (SQL Injection, CSRF, XSS Protection)
+✅ Responsive Dizayn
+✅ Azərbaycan dili
+
+┌──────────────────────────────────────────────────────────────┐
+│                   FAYIL STRUKTURU                            │
+└──────────────────────────────────────────────────────────────┘
+
+depod-survey/
+├── 📱 index.php                 (Sorğu səhifəsi)
+├── 📊 result.php                (Nəticə səhifəsi)
+├── 🔐 admin/                    (Admin panel)
+│   ├── login.php
+│   ├── dashboard.php
+│   ├── results.php
+│   ├── questions.php
+│   └── products.php
+├── 🔌 api/                      (API endpoints)
+├── 🏗️ classes/                  (PHP Classes)
+│   ├── Database.php
+│   ├── Security.php
+│   └── ... (7 total)
+├── ⚙️ config/                   (Konfiqurasiya)
+├── 🗄️ database/                 (SQL Schema)
+└── 📚 Documentation             (5 MD faylları)
+
+┌──────────────────────────────────────────────────────────────┐
+│                      TƏHLÜKƏSİZLİK                          │
+└──────────────────────────────────────────────────────────────┘
+
+🔒 PDO + Prepared Statements
+🔒 CSRF Token Protection
+🔒 Password Hashing
+🔒 Input Sanitization
+🔒 XSS Prevention
+🔒 Session Security
+🔒 Security Headers
+
+┌──────────────────────────────────────────────────────────────┐
+│                         SƏNƏDLƏR                             │
+└──────────────────────────────────────────────────────────────┘
+
+📄 README.md           - Tam quraşdırma təlimatı
+📄 INSTALL.md          - Sürətli quraşdırma
+📄 DOCUMENTATION.md    - Təfərrüatlı API/Page docs
+📄 PROJECT_SUMMARY.md  - Layihə xülasəsi
+📄 CHECKLIST.md        - Tamamlanma siyahısı
+
+┌──────────────────────────────────────────────────────────────┐
+│                      TEST ADDAMLARI                          │
+└──────────────────────────────────────────────────────────────┘
+
+1. Sorğunu doldurun (7 sual)
+2. Qiymətin real-vaxt yenilənməsinə baxın
+3. Nəticə səhifəsində məhsul tövsiyəsinə baxın
+4. Admin panel-ə daxil olun
+5. Dashboard statistikasına baxın
+6. Nəticələri açın
+7. Sualları və məhsulları redaktə edin
+
+┌──────────────────────────────────────────────────────────────┐
+│                     ÖNƏMLİ QEYDLƏR                           │
+└──────────────────────────────────────────────────────────────┘
+
+⚠️ İlk girişdən sonra admin şifrəsini dəyişdirin!
+⚠️ Production-da error_reporting söndürün
+⚠️ HTTPS istifadə edin (cookie_secure = 1)
+⚠️ Güclü DB şifrəsi istifadə edin
+
+┌──────────────────────────────────────────────────────────────┐
+│                         DƏSTƏK                               │
+└──────────────────────────────────────────────────────────────┘
+
+📧 Email: admin@depod.az
+🌐 Website: https://depod.az
+
+╔══════════════════════════════════════════════════════════════╗
+║                    LAYIHƏ HAZIRDIR! 🎉                      ║
+║                                                              ║
+║  Bütün funksiyalar tətbiq edilib və test üçün hazırdır.   ║
+║                                                              ║
+║                    Uğurlar! 🚀                              ║
+╚══════════════════════════════════════════════════════════════╝

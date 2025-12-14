@@ -1,0 +1,34 @@
+# Dependencies and packages
+vendor/
+node_modules/
+
+# Environment and configuration
+.env
+config/local.php
+
+# Logs and temporary files
+*.log
+*.tmp
+*.temp
+logs/
+tmp/
+
+# Database backups
+*.sql.gz
+backup_*.sql
+
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# OS files
+Thumbs.db
+desktop.ini
+
+# Upload directories (if added in future)
+uploads/
+images/uploads/
